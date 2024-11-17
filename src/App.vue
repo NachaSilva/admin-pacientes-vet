@@ -1,9 +1,8 @@
 <script setup>
-import { ref, reactive } from "vue";
+import { ref, reactive, onMounted, watch } from "vue";
 import { uid } from "uid";
 import Header from "./components/Header.vue";
 import Formulario from "./components/Formulario.vue";
-
 import Paciente from "./components/Paciente.vue";
 
 const paciente = reactive({
@@ -16,6 +15,23 @@ const paciente = reactive({
 });
 
 const pacientes = ref([]);
+
+watch(pacientes, ()=>{
+  guardarLocalStorage()
+}, {deep:true})
+
+const guardarLocalStorage = ()=>{
+  localStorage.setItem('pacientes', JSON.stringify(pacientes.value))
+}
+
+onMounted(()=>{
+  const pacientesStorage = localStorage.getItem('pacientes')
+  if(pacientesStorage){
+    pacientes.value=JSON.parse(pacientesStorage)
+  }
+})
+
+
 
 const guardarPaciente = () => {
   if (paciente.id) {
@@ -53,6 +69,10 @@ const actualizarPaciente = (id) => {
   )[0];
   Object.assign(paciente, pacienteEditar);
 };
+
+const eliminarPaciente = (id)=>{
+  pacientes.value = pacientes.value.filter(paciente => paciente.id !== id)
+}
 </script>
 
 <template>
@@ -67,6 +87,7 @@ const actualizarPaciente = (id) => {
         v-model:sintomas="paciente.sintomas"
         @guardar-paciente="guardarPaciente"
         :id="paciente.id"
+       
       />
       <div class="md:w-1/2 md:h-screen overflow-y-scroll">
         <h3 class="font-black text-3xl text-center">
@@ -82,6 +103,7 @@ const actualizarPaciente = (id) => {
             v-for="paciente in pacientes"
             :paciente="paciente"
             @actualizar-paciente="actualizarPaciente"
+             @eliminar-paciente = "eliminarPaciente"
           />
         </div>
         <p v-else class="mt-10 text-2xl text-center">No hay pacientes</p>
