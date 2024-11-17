@@ -1,5 +1,50 @@
-# Vue 3 + Vite
+# Administrador de pacientes - Veterinaria
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Índice
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+* [1. Descripción del Proyecto](#1-descripcion-del-proyecto)
+* [2. Tecnologías utilizadas](#2-tecnologías-utilizadas)
+* [3. Instrucciones de uso](#3-instrucciones-de-uso)
+* [4. Contribuciones](#4-contribuciones)
+* [5. Contacto](#5-contacto)
+
+## 1. Descripción del Proyecto
+
+El objetivo de este proyecto es la creación de un administrador de pacientes (mascotas) de una veterinaria, donde el profesional pueda registrar datos personales, síntomas, fecha de alta, entre otras cosas para tener un registro antes de ingresarlo. Este proyecto está pensado en satisfacer la necesidad de los usuarios, de una forma intuitiva y fácil de navegar donde puede crear, editar o eliminar lo que estime necesario y los datos quedan guardados para no perder la información en el tanscurso del tiempo. 
+
+## 2. Tecnologías utilizadas
+
+ * Vue.js: La interfaz de usuario está construida utilizando con el framework Vue.js, lo que permite crear componentes reutilizables y una experiencia de usuario fluida.
+
+ * Javascript: Lenguaje de programación. 
+
+ * Tailwind: Estilos y diseño de la aplicación.
+
+ * Figma: Creación e ideación de prototipo de baja y alta calidad.
+
+ * Responsive: Media query para ser adaptativo a mobile, tablet, laptop y desktop size.
+
+ * Trello: Para la organización de tareas y optimización de tiempo.
+
+ * Netlify: Para desplegar el sitio.
+
+## 3. Instrucciones de uso
+1. Clona este repositorio.
+2. Abre una terminal y navega hasta el directorio del proyecto.
+3. Ejecuta npm install para instalar las dependencias.
+4. Ejecuta npm run dev para iniciar la aplicación en tu navegador.
+5. Interactúa con la aplicación!
+
+## 4. Contribuciones
+¡Las contribuciones son bienvenidas! Si deseas contribuir a este proyecto, sigue estos pasos:
+
+1. Realiza un fork de este repositorio.
+2. Crea una rama con una descripción clara de la función que estás implementando.
+3. Desarrolla y prueba tu función.
+4. Realiza un pull request describiendo tus cambios.
+
+Como tip: Agregar más funcionalidades administrativas
+
+## 5. Contacto
+
+- [x] Si tienes alguna pregunta o sugerencia, no dudes en ponerte en contacto conmigo! [Aquí](https://www.linkedin.com/in/mariaignaciasilva/)
