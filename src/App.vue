@@ -1,45 +1,58 @@
 <script setup>
 import { ref, reactive } from "vue";
-import{uid} from 'uid'
+import { uid } from "uid";
 import Header from "./components/Header.vue";
 import Formulario from "./components/Formulario.vue";
 
 import Paciente from "./components/Paciente.vue";
 
 const paciente = reactive({
-  id:null,
-    nombre: '',
-    propietario: '',
-    email: '',
-    alta: '',
-    sintomas: ''
-})
+  id: null,
+  nombre: "",
+  propietario: "",
+  email: "",
+  alta: "",
+  sintomas: "",
+});
 
 const pacientes = ref([]);
 
-const guardarPaciente = ()=>{
-pacientes.value.push({
-  ...paciente,
-  id: uid()
-})
+const guardarPaciente = () => {
+  if (paciente.id) {
+   const {id} =paciente
+   const i = pacientes.value.findIndex((pacienteState)=>pacienteState.id===id)
+   pacientes.value[i] = {...paciente}
+  } else {
+    pacientes.value.push({
+      ...paciente,
+      id: uid(),
+    });
+  }
 
-//reiniciar el objeto
-// paciente.nombre=''
-// paciente.propietario=''
-// paciente.email=''
-// paciente.alta=''
-// paciente.sintomas=''
+  //reiniciar el objeto
+  // paciente.nombre=''
+  // paciente.propietario=''
+  // paciente.email=''
+  // paciente.alta=''
+  // paciente.sintomas=''
 
-//otra forma de lo anterior
-Object.assign(paciente, {
-  nombre: '',
-    propietario: '',
-    email: '',
-    alta: '',
-    sintomas: ''
-})
-}
+  //otra forma de lo anterior
+  Object.assign(paciente, {
+    nombre: "",
+    propietario: "",
+    email: "",
+    alta: "",
+    sintomas: "",
+    id:null
+  });
+};
 
+const actualizarPaciente = (id) => {
+  const pacienteEditar = pacientes.value.filter(
+    (paciente) => paciente.id === id
+  )[0];
+  Object.assign(paciente, pacienteEditar);
+};
 </script>
 
 <template>
@@ -47,12 +60,13 @@ Object.assign(paciente, {
     <Header />
     <div class="mt-12 md:flex">
       <Formulario
-      v-model:nombre="paciente.nombre"
-      v-model:propietario="paciente.propietario"
-      v-model:email="paciente.email"
-      v-model:alta="paciente.alta"
-      v-model:sintomas="paciente.sintomas"
-      @guardar-paciente ="guardarPaciente"
+        v-model:nombre="paciente.nombre"
+        v-model:propietario="paciente.propietario"
+        v-model:email="paciente.email"
+        v-model:alta="paciente.alta"
+        v-model:sintomas="paciente.sintomas"
+        @guardar-paciente="guardarPaciente"
+        :id="paciente.id"
       />
       <div class="md:w-1/2 md:h-screen overflow-y-scroll">
         <h3 class="font-black text-3xl text-center">
@@ -60,13 +74,15 @@ Object.assign(paciente, {
         </h3>
         <div v-if="pacientes.length">
           <p class="text-lg mt-5 text-center mb-10">
-      Información de 
-      <span class="text-indigo-600 font-bold"> Pacientes </span>
-    </p>
+            Información de
+            <span class="text-indigo-600 font-bold"> Pacientes </span>
+          </p>
 
-<Paciente
-    v-for="paciente in pacientes"
-    :paciente="paciente"/>
+          <Paciente
+            v-for="paciente in pacientes"
+            :paciente="paciente"
+            @actualizar-paciente="actualizarPaciente"
+          />
         </div>
         <p v-else class="mt-10 text-2xl text-center">No hay pacientes</p>
       </div>
