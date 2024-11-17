@@ -13,7 +13,7 @@ const emit = defineEmits([
   "update:email",
   "update:alta",
   "update:sintomas",
-  "guardar-paciente"
+  "guardar-paciente",
 ]);
 
 const props = defineProps({
@@ -21,22 +21,22 @@ const props = defineProps({
     type: String,
     required: true,
   },
-  propietario:{
+  propietario: {
     type: String,
     required: true,
   },
-  email:{
+  email: {
     type: String,
     required: true,
   },
-  alta:{
+  alta: {
     type: String,
     required: true,
   },
-  sintomas:{
+  sintomas: {
     type: String,
     required: true,
-  }
+  },
 });
 
 const validar = (e) => {
@@ -47,7 +47,16 @@ const validar = (e) => {
     alerta.tipo = "error";
     return;
   }
-  emit('guardar-paciente')
+  emit("guardar-paciente");
+  alerta.mensaje = "Paciente almacenado correctamente";
+  alerta.tipo = "exito";
+
+  setTimeout(() => {
+    Object.assign(alerta, {
+      tipo: "",
+      mensaje: "",
+    });
+  }, 3000);
 };
 </script>
 
